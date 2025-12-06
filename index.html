@@ -2,25 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <!-- Mobile zoom fix -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Wedding Itinerary – Ashnut &amp; Gunjan</title>
 
-  <!-- Optional Google Fonts -->
+  <!-- Google Fonts -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600;700&display=swap"
     rel="stylesheet"
   />
 
   <style>
     :root {
-      --bg-gradient: radial-gradient(circle at top, #ffe0f1, #f8f0ff 45%, #ffe9f3 80%);
-      --card-bg: #fffafc;
-      --primary: #c64a7a;
-      --primary-soft: #f8bfd5;
-      --primary-deep: #a33661;
-      --text-main: #4b2c3a;
-      --text-soft: #8a586e;
-      --border-soft: #f3cddd;
-      --shadow-soft: 0 20px 45px rgba(0, 0, 0, 0.16);
+      --bg-gradient: radial-gradient(circle at top, #ffe7f0, #fff7e7 40%, #ffe9ff 85%);
+      --card-bg: #fffdf8;
+      --primary: #ff4f7b;
+      --primary-deep: #d12255;
+      --accent-yellow: #ffb300;
+      --accent-orange: #ff7a3c;
+      --text-main: #3d2432;
+      --text-soft: #7a4a5f;
+      --border-soft: #ffd1dd;
+      --shadow-soft: 0 24px 60px rgba(0, 0, 0, 0.18);
       --radius-xl: 32px;
     }
 
@@ -28,121 +31,141 @@
 
     body {
       margin: 0;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       background: var(--bg-gradient);
-      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: "Poppins", system-ui, sans-serif;
       color: var(--text-main);
     }
 
-    /* Phone-style frame with 9:16 aspect ratio */
     .phone-frame {
-      aspect-ratio: 9 / 16;
-      width: min(430px, 100vw - 24px);
-      max-height: 95vh;
+      max-width: 540px;
+      margin: 16px auto;
       background: #ffffff;
       border-radius: var(--radius-xl);
       box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(255, 255, 255, 0.7);
+      border: 2px solid rgba(255, 255, 255, 0.9);
       overflow: hidden;
+    }
+
+    .scroll-area {
+      background:
+        linear-gradient(180deg, #fff7fb 0%, #fffdf9 40%, #ffece4 100%),
+        url("data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffe1ec' fill-opacity='0.6'%3E%3Ccircle cx='8' cy='8' r='2'/%3E%3Ccircle cx='80' cy='40' r='1.6'/%3E%3Ccircle cx='120' cy='120' r='1.8'/%3E%3Ccircle cx='40' cy='120' r='1.4'/%3E%3C/g%3E%3C/svg%3E");
+      background-size: auto, 220px 220px;
+    }
+
+    .top-header {
       position: relative;
-    }
-
-    /* Scrollable area with snap */
-    .screen-scroller {
-      height: 100%;
-      overflow-y: auto;
-      scroll-snap-type: y mandatory;
-      -webkit-overflow-scrolling: touch;
-      background: linear-gradient(180deg, #fff5fb 0%, #fffdfd 40%, #ffe6f2 100%);
-    }
-
-    .screen-scroller::-webkit-scrollbar {
-      width: 0;
-      height: 0;
-    }
-
-    .screen {
-      scroll-snap-align: start;
-      min-height: 100%;
-      padding: 20px 20px 26px;
-      position: relative;
-    }
-
-    /* Floral arch header (reused on each screen) */
-    .arch-header {
-      position: relative;
-      padding: 12px 12px 16px;
-      margin-bottom: 6px;
+      padding: 18px 20px 22px;
       text-align: center;
+      overflow: hidden;
     }
 
-    .arch-header::before {
+    .top-header::before {
       content: "";
       position: absolute;
-      inset: -80px -40px auto -40px;
+      inset: -120px -80px 20px;
       background:
-        radial-gradient(circle at 15% 0%, rgba(255, 204, 229, 0.8) 0, transparent 55%),
-        radial-gradient(circle at 85% 0%, rgba(250, 190, 220, 0.95) 0, transparent 60%),
-        linear-gradient(180deg, rgba(255, 204, 229, 0.9), transparent 75%);
+        radial-gradient(circle at 10% 0%, rgba(255,204,229,0.9) 0, transparent 60%),
+        radial-gradient(circle at 90% 0%, rgba(255,200,144,0.95) 0, transparent 60%),
+        linear-gradient(180deg, rgba(255,238,194,0.9), transparent 80%);
       border-bottom-left-radius: 999px;
       border-bottom-right-radius: 999px;
-      opacity: 0.9;
       z-index: -1;
     }
 
-    .arch-subtitle {
-      text-transform: uppercase;
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      color: #6f3f56;
-      margin-bottom: 4px;
-    }
-
-    .arch-names {
-      font-family: "Great Vibes", cursive;
-      font-size: 30px;
-      color: var(--primary-deep);
-      margin: 0;
-    }
-
-    .arch-meta {
+    .tag-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px dashed rgba(255, 117, 79, 0.7);
       font-size: 11px;
-      color: #6f3f56;
-      margin-top: 2px;
+      letter-spacing: 0.18em;
+      color: var(--text-soft);
+      margin-bottom: 6px;
     }
 
-    /* Day tag */
-    .day-tag {
-      margin-top: 10px;
-      margin-bottom: 8px;
+    .couple-name {
+      font-family: "Great Vibes", cursive;
+      font-size: 40px;
+      color: var(--primary-deep);
+      margin: 2px 0 4px;
+    }
+
+    .subline {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .chip-row {
+      margin-top: 8px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 11px;
+    }
+
+    .chip {
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255,165,0,0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .chip .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-orange);
+    }
+
+    .timeline {
+      padding: 8px 18px 20px;
+    }
+
+    .day-block {
+      margin-top: 18px;
+      padding: 14px 12px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.92);
+      border: 2px solid rgba(255,193,218,0.9);
+      box-shadow: 0 16px 32px rgba(255,95,131,0.08);
+    }
+
+    .day-label-row {
       display: flex;
       justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .day-label {
+      display: inline-flex;
       align-items: center;
-      padding: 8px 10px;
+      gap: 8px;
+      padding: 6px 12px;
       border-radius: 999px;
-      border: 1px solid var(--border-soft);
-      background: rgba(255, 255, 255, 0.9);
+      background: linear-gradient(90deg, #ffe0f2, #fff0d2);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+    }
+
+    .date-pill {
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--primary);
+      color: #fff;
       font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-soft);
+      font-weight: 600;
     }
 
-    .day-tag span:last-child {
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: var(--primary-soft);
-      color: var(--text-main);
-      font-weight: 500;
-      letter-spacing: 0.08em;
-    }
-
-    /* Events list (vertical for small screen) */
     .events {
-      margin-top: 8px;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -150,283 +173,236 @@
 
     .event-card {
       display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 10px 11px;
+      gap: 12px;
+      padding: 11px 12px;
       border-radius: 18px;
-      background: #ffffff;
-      border: 1px solid rgba(240, 194, 214, 0.85);
-      box-shadow: 0 10px 18px rgba(198, 74, 122, 0.05);
+      background: #fffdfb;
+      border: 1px solid rgba(255,202,218,0.9);
     }
 
     .event-icon {
-      width: 34px;
-      height: 34px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
-      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: radial-gradient(circle at 30% 20%, #ffe7f3, #f8c0da);
-      font-size: 18px;
+      background: radial-gradient(circle at 30% 20%, #ffe7ff, #ffc0dd);
+      font-size: 22px;
+      box-shadow: 0 10px 18px rgba(255,105,180,0.25);
     }
 
-    .event-body-title {
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
+    .event-title { font-size: 15px; font-weight: 700; }
 
-    .event-meta {
-      font-size: 11px;
-      color: var(--text-soft);
-      margin: 0;
-    }
+    .event-meta { font-size: 12px; color: var(--text-soft); }
 
     .event-note {
       font-size: 11px;
-      color: var(--text-soft);
       font-style: italic;
-      margin-top: 1px;
-    }
-
-    /* Footer note / swipe hint */
-    .footer-note {
-      text-align: center;
-      margin-top: 14px;
-      font-size: 10px;
       color: var(--text-soft);
     }
 
-    .swipe-hint {
-      margin-top: 6px;
-      font-size: 10px;
-      opacity: 0.7;
+    .bottom-area {
+      padding: 6px 18px 18px;
+      text-align: center;
     }
 
-    .swipe-hint span {
-      display: inline-block;
-      animation: bounce 1.4s infinite;
+    .blessing-text {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-bottom: 14px;
     }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50%      { transform: translateY(4px); }
-    }
-
-    /* RSVP CTA (only on last screen, anchored to bottom) */
-    .cta-wrapper {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 18px;
-      display: flex;
-      justify-content: center;
+    .blessing-text span {
+      color: var(--primary-deep);
+      font-weight: 600;
     }
 
     .cta-btn {
-      text-decoration: none;
-      background: var(--primary);
-      color: #ffffff;
-      padding: 11px 28px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 600;
-      box-shadow: 0 10px 25px rgba(198, 74, 122, 0.45);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      border: none;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      gap: 8px;
+      padding: 13px 32px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--primary), var(--accent-orange));
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      box-shadow: 0 14px 35px rgba(209,34,85,0.5);
     }
 
-    .cta-btn:hover {
-      background: var(--primary-deep);
-      transform: translateY(-1px);
-      box-shadow: 0 12px 30px rgba(163, 54, 97, 0.5);
+    .cta-caption {
+      margin-top: 6px;
+      font-size: 10px;
+      color: var(--text-soft);
     }
 
-    .cta-btn span.icon {
-      font-size: 15px;
+    @media (max-width: 600px) {
+      .phone-frame {
+        margin: 0;
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+      }
+      .timeline,
+      .bottom-area {
+        padding: 8px 14px 18px;
+      }
     }
 
-    /* Make sure content never hides behind CTA on last screen */
-    .screen.last {
-      padding-bottom: 70px;
-    }
-
-    @media (max-width: 400px) {
-      .arch-names { font-size: 27px; }
+    @media (max-width: 420px) {
+      .couple-name { font-size: 34px; }
     }
   </style>
 </head>
 
 <body>
   <div class="phone-frame">
-    <div class="screen-scroller">
+    <div class="scroll-area">
 
-      <!-- SCREEN 1 – DAY 1 -->
-      <section class="screen">
-        <header class="arch-header">
-          <div class="arch-subtitle">Wedding Itinerary</div>
-          <h1 class="arch-names">Ashnut &amp; Gunjan</h1>
-          <div class="arch-meta">12th – 14th February 2026 · Kolkata, India</div>
-        </header>
-
-        <div class="day-tag">
-          <span>Day 1 · Thursday</span>
-          <span>12 Feb 2026</span>
+      <header class="top-header">
+        <div class="tag-pill">
+          💃 Shaadi Shenanigans 🕺
         </div>
+        <h1 class="couple-name">Ashnut &amp; Gunjan</h1>
+        <div class="subline">12th – 14th February 2026 · Kolkata, India</div>
 
-        <div class="events">
-          <article class="event-card">
-            <div class="event-icon">🏨</div>
-            <div>
-              <div class="event-body-title">Check-ins</div>
-              <p class="event-meta">The Westin Kolkata Rajarhat · 3:00 PM onwards</p>
-            </div>
-          </article>
-
-          <article class="event-card">
-            <div class="event-icon">🌸</div>
-            <div>
-              <div class="event-body-title">Mayra Ceremony</div>
-              <p class="event-meta">Saawariya Banquet · 5:30 PM onwards</p>
-              <p class="event-note">Hi-tea followed by dinner</p>
-            </div>
-          </article>
+        <div class="chip-row">
+          <div class="chip"><span class="dot"></span> Big Fat Indian Wedding</div>
+          <div class="chip">🪔 Dhol · Dhamaka · Drama</div>
         </div>
+      </header>
 
-        <div class="footer-note">
-          Welcome to Kolkata! Settle in and join us as the celebrations begin.
-          <div class="swipe-hint">
-            Swipe up for <strong>Day 2</strong> <span>⬆</span>
+      <main class="timeline">
+
+        <!-- Day 1 -->
+        <section class="day-block">
+          <div class="day-label-row">
+            <div class="day-label">🌅 Day 1 · Thursday</div>
+            <div class="date-pill">12 Feb 2026</div>
           </div>
-        </div>
-      </section>
 
-      <!-- SCREEN 2 – DAY 2 -->
-      <section class="screen">
-        <header class="arch-header">
-          <div class="arch-subtitle">Wedding Itinerary</div>
-          <h1 class="arch-names">Ashnut &amp; Gunjan</h1>
-          <div class="arch-meta">The Wedding Day · 13th February 2026</div>
-        </header>
-
-        <div class="day-tag">
-          <span>Day 2 · Friday</span>
-          <span>13 Feb 2026</span>
-        </div>
-
-        <div class="events">
-          <article class="event-card">
-            <div class="event-icon">🥐</div>
-            <div>
-              <div class="event-body-title">Breakfast</div>
-              <p class="event-meta">The Westin Kolkata Rajarhat · 7:30 AM onwards</p>
+          <div class="events">
+            <div class="event-card">
+              <div class="event-icon">🏨</div>
+              <div>
+                <div class="event-title">Check Ins</div>
+                <div class="event-meta">The Westin Kolkata Rajarhat · 3:00 PM onwards</div>
+              </div>
             </div>
-          </article>
 
-          <article class="event-card">
-            <div class="event-icon">🐴</div>
-            <div>
-              <div class="event-body-title">Nikasi</div>
-              <p class="event-meta">Mistika Banquet, Eco Park · 10:00 AM</p>
+            <div class="event-card">
+              <div class="event-icon">🌸</div>
+              <div>
+                <div class="event-title">Mayra &amp; Mehendi</div>
+                <div class="event-meta">Saawariya Banquet · 5 PM onwards</div>
+                <p class="event-note">Hi-tea followed by dinner.</p>
+                <p class="event-note">Jain food arrangements will be available before sunset.</p>
+              </div>
             </div>
-          </article>
-
-          <article class="event-card">
-            <div class="event-icon">💍</div>
-            <div>
-              <div class="event-body-title">Varmala</div>
-              <p class="event-meta">Mistika Banquet, Eco Park · 11:45 AM</p>
-            </div>
-          </article>
-
-          <article class="event-card">
-            <div class="event-icon">🔥</div>
-            <div>
-              <div class="event-body-title">Phere</div>
-              <p class="event-meta">Mistika Banquet, Eco Park · 12:30 PM</p>
-            </div>
-          </article>
-
-          <article class="event-card">
-            <div class="event-icon">🍽️</div>
-            <div>
-              <div class="event-body-title">Lunch</div>
-              <p class="event-meta">Mistika Banquet, Eco Park · 1:00 PM onwards</p>
-            </div>
-          </article>
-
-          <article class="event-card">
-            <div class="event-icon">🎉</div>
-            <div>
-              <div class="event-body-title">Reception</div>
-              <p class="event-meta">Mistika Banquet, Eco Park · 5:30 PM onwards</p>
-              <p class="event-note">Hi-tea followed by dinner</p>
-            </div>
-          </article>
-        </div>
-
-        <div class="footer-note">
-          A day of sacred vows, joyful rituals and endless celebration.
-          <div class="swipe-hint">
-            Swipe up for <strong>Day 3 &amp; RSVP</strong> <span>⬆</span>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- SCREEN 3 – DAY 3 + RSVP -->
-      <section class="screen last">
-        <header class="arch-header">
-          <div class="arch-subtitle">Wedding Itinerary</div>
-          <h1 class="arch-names">Ashnut &amp; Gunjan</h1>
-          <div class="arch-meta">Farewell &amp; Warm Goodbyes · 14th February 2026</div>
-        </header>
+        <!-- Day 2 -->
+        <section class="day-block">
+          <div class="day-label-row">
+            <div class="day-label">🎊 Day 2 · Friday</div>
+            <div class="date-pill">13 Feb 2026</div>
+          </div>
 
-        <div class="day-tag">
-          <span>Day 3 · Saturday</span>
-          <span>14 Feb 2026</span>
-        </div>
-
-        <div class="events">
-          <article class="event-card">
-            <div class="event-icon">☕</div>
-            <div>
-              <div class="event-body-title">Breakfast</div>
-              <p class="event-meta">The Westin Kolkata Rajarhat · 7:30 AM onwards</p>
+          <div class="events">
+            <div class="event-card">
+              <div class="event-icon">🥐</div>
+              <div>
+                <div class="event-title">Breakfast</div>
+                <div class="event-meta">The Westin Kolkata Rajarhat · 7:30 AM onwards</div>
+              </div>
             </div>
-          </article>
 
-          <article class="event-card">
-            <div class="event-icon">🧳</div>
-            <div>
-              <div class="event-body-title">Check-out</div>
-              <p class="event-meta">The Westin Kolkata Rajarhat · 11:00 AM</p>
+            <div class="event-card">
+              <div class="event-icon">🐴</div>
+              <div>
+                <div class="event-title">Nikasi</div>
+                <div class="event-meta">Mistika Banquet, Eco Park · 10:00 AM</div>
+              </div>
             </div>
-          </article>
+
+            <div class="event-card">
+              <div class="event-icon">🔥</div>
+              <div>
+                <div class="event-title">Phera</div>
+                <div class="event-meta">Mistika Banquet, Eco Park · 12:30 PM</div>
+              </div>
+            </div>
+
+            <div class="event-card">
+              <div class="event-icon">🍽️</div>
+              <div>
+                <div class="event-title">Lunch</div>
+                <div class="event-meta">Mistika Banquet, Eco Park · 1:00 PM onwards</div>
+              </div>
+            </div>
+
+            <div class="event-card">
+              <div class="event-icon">🎉</div>
+              <div>
+                <div class="event-title">Reception</div>
+                <div class="event-meta">Mistika Banquet, Eco Park · 5:30 PM onwards</div>
+                <p class="event-note">Hi-tea followed by dinner.</p>
+                <p class="event-note">Jain food arrangements will be available before sunset.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Day 3 -->
+        <section class="day-block">
+          <div class="day-label-row">
+            <div class="day-label">🌇 Day 3 · Saturday</div>
+            <div class="date-pill">14 Feb 2026</div>
+          </div>
+
+          <div class="events">
+            <div class="event-card">
+              <div class="event-icon">☕</div>
+              <div>
+                <div class="event-title">Breakfast</div>
+                <div class="event-meta">The Westin Kolkata Rajarhat · 7:30 AM onwards</div>
+              </div>
+            </div>
+
+            <div class="event-card">
+              <div class="event-icon">🧳</div>
+              <div>
+                <div class="event-title">Check Out</div>
+                <div class="event-meta">The Westin Kolkata Rajarhat · 12:00 PM</div>
+                <p class="event-note">Hugs, photos &amp; promises to meet again soon ❤️</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <footer class="bottom-area">
+        <div class="blessing-text">
+          Your presence means the world to <span>Ashnut &amp; Gunjan</span>. Kindly confirm your attendance.
         </div>
 
-        <div class="footer-note">
-          Your presence is our greatest blessing. We can’t wait to celebrate each moment with you.
-        </div>
+        <a
+          href="https://wa.link/4mz1nx"
+          class="cta-btn"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          💌 RSVP on WhatsApp
+        </a>
 
-        <!-- RSVP CTA -->
-        <div class="cta-wrapper">
-          <a
-            href="https://wa.link/vo2toq"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="cta-btn"
-          >
-            <span class="icon">💌</span>
-            <span>RSVP</span>
-          </a>
-        </div>
-      </section>
+        <div class="cta-caption">Tap to send your RSVP directly to the couple.</div>
+      </footer>
 
     </div>
   </div>
